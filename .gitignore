@@ -1,0 +1,15 @@
+# Virtual environment 
+.venv/
+env/
+venv/
+
+# compiled cache
+__pycache__/
+*.py[cod]
+
+# Experiment outputs
+logs/
+models/
+videos/
+*.mp4
+*.gif
