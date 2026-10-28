@@ -48,7 +48,7 @@ def main():
         results[name] = evaluate_model(path, num_episodes=20)
 
     print("\n" + "=" * 80)
-    print("FINAL BENCHMARK COMPARISON (20 Episodes on Raw LunarLander-v3)")
+    print("FINAL BENCHMARK COMPARISON ")
     print("=" * 80)
     print(f"{'Model':<25} | {'Reward (Mean ± Std)':<20} | {'Success':<8} | {'Crash':<8} | {'Avg Steps':<10}")
     print("-" * 80)
