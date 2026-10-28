@@ -8,8 +8,8 @@ __pycache__/
 *.py[cod]
 
 # Experiment outputs
-logs/
-models/
-videos/
-*.mp4
-*.gif
+# logs/
+# models/
+# videos/
+# *.mp4
+# *.gif
