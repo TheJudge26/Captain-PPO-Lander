@@ -5,6 +5,7 @@ from stable_baselines3.common.callbacks import CheckpointCallback
 
 from src.utils.config import load_config
 from src.models.ppo_agent import create_ppo_agent
+from src.envs.wrappers import NaiveHoverRewardWrapper
 
 def main():
     parser = argparse.ArgumentParser(description="Train PPO on LunarLander")
@@ -22,6 +23,12 @@ def main():
         gravity=config["env"]["gravity"],
         enable_wind=config["env"]["enable_wind"]
     )
+
+    wrapper_type = config["env"].get("wrapper")
+    if wrapper_type == "naive_hover":
+        bonus = float(config["env"].get("bonus_weight", 1.0))
+        print(f"Applying NaiveHoverRewardWrapper (bonus_weight={bonus})...")
+        env = NaiveHoverRewardWrapper(env, bonus_weight=bonus)
 
     checkpoint_callback = CheckpointCallback(
         save_freq=config["training"]["save_freq"],
