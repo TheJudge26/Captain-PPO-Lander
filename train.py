@@ -5,7 +5,7 @@ from stable_baselines3.common.callbacks import CheckpointCallback
 
 from src.utils.config import load_config
 from src.models.ppo_agent import create_ppo_agent
-from src.envs.wrappers import NaiveHoverRewardWrapper
+from src.envs.wrappers import NaiveHoverRewardWrapper, PBRSRewardWrapper
 
 def main():
     parser = argparse.ArgumentParser(description="Train PPO on LunarLander")
@@ -29,6 +29,11 @@ def main():
         bonus = float(config["env"].get("bonus_weight", 1.0))
         print(f"Applying NaiveHoverRewardWrapper (bonus_weight={bonus})...")
         env = NaiveHoverRewardWrapper(env, bonus_weight=bonus)
+    elif wrapper_type == "pbrs":
+        gamma = float(config["ppo"].get("gamma", 0.99))
+        shaping_weight = float(config["env"].get("shaping_weight", 1.0))
+        print(f"Applying PBRSRewardWrapper (gamma={gamma}, shaping_weight={shaping_weight})...")
+        env = PBRSRewardWrapper(env, gamma=gamma, shaping_weight=shaping_weight)
 
     checkpoint_callback = CheckpointCallback(
         save_freq=config["training"]["save_freq"],
